@@ -3,9 +3,9 @@ import numpy as np
 
 
 # define the layer(s) that you will use
-# here we just use one densly connected layer with one node
-# (densly connected => every node connected to every other)
-layer = tf.keras.layers.Dense(units=1, input_shape=[1])
+# here we just use one densely connected layer with one node
+# (densely connected => every node connected to every other)
+layer = tf.keras.layers.Dense(units=1, input_shape=[1]) 
 
 # a model is defined as a sequence of layers
 model = tf.keras.Sequential(layer)
