@@ -1,6 +1,11 @@
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
+# note that for tfds we need to use as_numpy() to ensure the
+# data is in a format that keras can work with
+# batch_size of -1 means 'give me all the data'
+# as_supervised means 'also give me the test data'
+
 (training_img, training_lbl), (test_img, test_lbl) = \
     tfds.as_numpy(tfds.load('fashion_mnist',
                             split=['train', 'test'],
