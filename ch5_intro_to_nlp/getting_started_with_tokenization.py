@@ -29,3 +29,8 @@ tokenizer.fit_on_texts(sentences)
 # but this can be adjusted by the filters during initialization
 
 print(tokenizer.word_index)
+
+# now we can get sequences for sentences we pass in
+
+sequences = tokenizer.texts_to_sequences(sentences)
+print(sequences)
