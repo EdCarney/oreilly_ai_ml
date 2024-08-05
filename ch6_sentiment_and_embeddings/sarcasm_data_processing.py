@@ -33,6 +33,7 @@ def _get_sarcasm_data():
         sentence = sentence.replace('.', ' . ')
         sentence = sentence.replace(',', ' , ')
         sentence = sentence.replace('-', ' - ')
+        sentence = sentence.replace('—', ' — ')
         sentence = sentence.replace('/', ' / ')
 
         # remove any HTML tags
