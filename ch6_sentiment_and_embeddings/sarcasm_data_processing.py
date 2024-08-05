@@ -7,7 +7,7 @@ from constants import STOPWORDS
 
 DATA_FILE = "Sarcasm_Headlines_Dataset_v2.json"
 TRAINING_SIZE = 23_000
-VOCAB_SIZE = 10_000
+VOCAB_SIZE = 20_000
 OOV_TOKEN = "<OOV>"
 MAX_LENGTH = 10
 PAD_TYPE = "post"
@@ -67,12 +67,12 @@ def _get_sarcasm_training_testing_splits():
             )
 
 
-def get_sarcasm_sequences_and_labels():
+def get_sarcasm_sequences_and_labels(vocab_size=VOCAB_SIZE):
     (training_sentences, training_labels), (testing_sentences, testing_labels)\
             = _get_sarcasm_training_testing_splits()
 
     tokenizer = tf.keras.preprocessing.text.Tokenizer(
-            num_words=VOCAB_SIZE,
+            num_words=vocab_size,
             oov_token=OOV_TOKEN)
 
     tokenizer.fit_on_texts(training_sentences)
