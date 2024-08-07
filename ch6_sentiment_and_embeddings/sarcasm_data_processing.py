@@ -9,7 +9,7 @@ DATA_FILE = "Sarcasm_Headlines_Dataset_v2.json"
 TRAINING_SIZE = 23_000
 VOCAB_SIZE = 20_000
 OOV_TOKEN = "<OOV>"
-MAX_LENGTH = 10
+MAX_LENGTH = 85
 PAD_TYPE = "post"
 TRUNC_TYPE = "post"
 
