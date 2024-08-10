@@ -30,7 +30,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # train the model
-model.fit(training_imgs, training_lbls, epochs=5)
+history: tf.keras.callbacks.History = model.fit(training_imgs, training_lbls, epochs=5)
 
 # check the model's accuracy
 model.evaluate(test_imgs, test_lbls)
@@ -40,3 +40,4 @@ model.evaluate(test_imgs, test_lbls)
 classifications = model.predict(test_imgs)
 print(classifications[0])
 print(test_lbls[0])
+print(history.history)
