@@ -8,5 +8,8 @@
 /dataSources.local.xml
 .idea/
 __pycache__/
+
+# ignore all datasets
 horse-or-human/
 *.h5
+glove.*
