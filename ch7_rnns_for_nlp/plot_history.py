@@ -1,3 +1,5 @@
+#! /opt/anaconda3/envs/tensor-flow/bin/python
+
 from typing import Dict, List
 import plotext as plt
 import json
