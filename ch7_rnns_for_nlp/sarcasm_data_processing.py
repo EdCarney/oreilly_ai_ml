@@ -96,3 +96,16 @@ def get_sarcasm_sequences_and_labels(vocab_size=VOCAB_SIZE):
             (training_sequences, training_labels),
             (testing_sequences, testing_labels)
             )
+
+
+def get_sarcasm_tokenizer(vocab_size=VOCAB_SIZE) -> tf.keras.preprocessing.text.Tokenizer:
+    (training_sentences, training_labels), (testing_sentences, testing_labels)\
+            = _get_sarcasm_training_testing_splits()
+
+    tokenizer = tf.keras.preprocessing.text.Tokenizer(
+            num_words=vocab_size,
+            oov_token=OOV_TOKEN)
+
+    tokenizer.fit_on_texts(training_sentences)
+
+    return tokenizer
