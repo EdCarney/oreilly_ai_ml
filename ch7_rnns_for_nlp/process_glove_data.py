@@ -22,15 +22,13 @@ def _get_tokenizer_embedding(vocab_sz: int, embeddings: Dict[str, np.ndarray]) -
     embedding_sz = len(next(iter(embeddings.values())))
     embedding_mat = np.zeros((vocab_sz, embedding_sz))
 
-    num_words = 0
-    for word, _ in tokenizer.word_index.items():
-        if num_words == vocab_sz:
+    for word, index in tokenizer.word_index.items():
+        if index == vocab_sz:
             break
         embedding_vec = embeddings.get(word)
         if embedding_vec is None:
             continue
-        embedding_mat[num_words] = embedding_vec
-        num_words += 1
+        embedding_mat[index] = embedding_vec
 
     return embedding_mat
 
