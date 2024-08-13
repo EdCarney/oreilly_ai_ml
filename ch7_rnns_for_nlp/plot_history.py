@@ -13,10 +13,12 @@ def read_hist_from_file(filename: str) -> Dict[str, List[float]]:
 
 
 def plot_data(title, train_data, validation_data):
+    mark = "fhd"
     plt.clear_figure()
+    plt.canvas_color("white")
     plt.title(title)
-    plt.plot(train_data, label="training")
-    plt.plot(validation_data, label="validation")
+    plt.plot(train_data, label="training", marker=mark, color="black")
+    plt.plot(validation_data, label="validation", marker=mark, color="green")
     plt.ylim(lower=0)
     plt.clear_terminal()
     plt.show()
