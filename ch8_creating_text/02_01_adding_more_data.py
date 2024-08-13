@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import json
 
 # we will do the same thing as before, except now we will feed some sample
 # text to our model and have it predict the next word
@@ -45,7 +46,10 @@ model.add(tf.keras.layers.Dense(num_words, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam',
               metrics=['acc'])
 
-model.fit(inputs, outputs, epochs=1500, verbose=1)
+history = model.fit(inputs, outputs, epochs=1500, verbose=1)
+
+with open('02_01_history.json', 'w') as f:
+    json.dump(history.history, f)
 
 # let's define the start of the sentence we want to use
 # note that the words you use should ideally be in the corpus
