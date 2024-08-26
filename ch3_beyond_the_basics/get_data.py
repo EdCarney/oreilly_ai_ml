@@ -19,7 +19,7 @@ def download_training_data():
     print("Downloading data from", url)
     urllib.request.urlretrieve(url, TRAINING_ZIP)
 
-    with zipfile.ZipFile(TRAINING_ZIP, 'r') as zip_ref:
+    with zipfile.ZipFile(TRAINING_ZIP, "r") as zip_ref:
         zip_ref.extractall(TRAINING_DIR)
 
     os.remove(TRAINING_ZIP)
@@ -34,7 +34,7 @@ def download_validation_data():
     print("Downloading data from", url)
     urllib.request.urlretrieve(url, VALIDATION_ZIP)
 
-    with zipfile.ZipFile(VALIDATION_ZIP, 'r') as zip_ref:
+    with zipfile.ZipFile(VALIDATION_ZIP, "r") as zip_ref:
         zip_ref.extractall(VALIDATION_DIR)
 
     os.remove(VALIDATION_ZIP)

@@ -31,8 +31,9 @@ EMBEDDING_DIM = 64
 DENSE_LAYER_NEURONS = 24
 EPOCHS = 30
 
-(train_seqs, train_lbls), (test_seqs, test_lbls) =\
-        get_sarcasm_sequences_and_labels(VOCAB_SIZE)
+(train_seqs, train_lbls), (test_seqs, test_lbls) = get_sarcasm_sequences_and_labels(
+    VOCAB_SIZE
+)
 
 train_seqs = np.array(train_seqs)
 train_lbls = np.array(train_lbls)
@@ -43,22 +44,24 @@ test_lbls = np.array(test_lbls)
 # vocab size; but for an RNN layer that would be too small, so instead we have
 # the same size as the embedding dimension
 
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Embedding(VOCAB_SIZE, EMBEDDING_DIM),
-    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(EMBEDDING_DIM)),
-    tf.keras.layers.Dense(DENSE_LAYER_NEURONS, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid'),
-    ])
+model = tf.keras.models.Sequential(
+    [
+        tf.keras.layers.Embedding(VOCAB_SIZE, EMBEDDING_DIM),
+        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(EMBEDDING_DIM)),
+        tf.keras.layers.Dense(DENSE_LAYER_NEURONS, activation="relu"),
+        tf.keras.layers.Dense(1, activation="sigmoid"),
+    ]
+)
 
 # note that this model is greatly improved by creating your own optimizer with
 # a reduced learning rate; otherwise the model quickly overfits to the data in
 # this case
 
-model.compile(optimizer='adam',
-              loss=tf.keras.losses.BinaryCrossentropy(), metrics=['acc'])
+model.compile(
+    optimizer="adam", loss=tf.keras.losses.BinaryCrossentropy(), metrics=["acc"]
+)
 
 print(model.summary())
 
-model.fit(train_seqs, train_lbls, epochs=EPOCHS,
-          validation_data=(test_seqs, test_lbls))
+model.fit(train_seqs, train_lbls, epochs=EPOCHS, validation_data=(test_seqs, test_lbls))
 model.evaluate(test_seqs, test_lbls)

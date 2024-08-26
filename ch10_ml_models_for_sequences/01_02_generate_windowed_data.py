@@ -15,9 +15,7 @@ def windowed_dataset(series, window_sz, batch_sz, shuffle_buf) -> tf.data.Datase
     return dataset
 
 
-# first we need to generate training and validation sets from the data per
-# usual
-
+# first we need to generate training and validation sets from the data per usual
 split_time = 1000
 
 (time, series) = generate_test_data()

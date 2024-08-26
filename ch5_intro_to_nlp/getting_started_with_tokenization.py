@@ -12,11 +12,7 @@ import tensorflow as tf
 # and have opposite meanings ('antigrams'); this is a problem for
 # training
 
-sentences = [
-        'it is rainy today',
-        'it is sunny today',
-        'is it raining today?'
-        ]
+sentences = ["it is rainy today", "it is sunny today", "is it raining today?"]
 
 # we initialize the tokenizer and specify the max number of words
 # allowed in its corpus

@@ -11,10 +11,10 @@ mnist_train, info = tfds.load("fashion_mnist", split="train", with_info=True)
 assert isinstance(mnist_train, tf.data.Dataset)
 print(type(mnist_train))
 
-print('\n')
+print("\n")
 print(info)
 for item in mnist_train.take(1):
     print(type(item))
     print(item.keys())
-    #print(item['image'])
-    print(item['label'])
+    # print(item['image'])
+    print(item["label"])

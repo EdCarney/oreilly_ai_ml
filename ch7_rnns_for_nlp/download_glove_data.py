@@ -5,18 +5,18 @@ import sys
 
 
 DATASET_MAP = {
-        "TWITTER_2B": "https://nlp.stanford.edu/data/glove.twitter.27B.zip",
-        "COMMON_CRAWL_32B": "https://nlp.stanford.edu/data/glove.42B.300d.zip",
-        "COMMON_CRAWL_840B": "https://nlp.stanford.edu/data/glove.840B.300d.zip",
-        "GIGAWORD_6B": "https://nlp.stanford.edu/data/glove.6B.zip"
-        }
+    "TWITTER_2B": "https://nlp.stanford.edu/data/glove.twitter.27B.zip",
+    "COMMON_CRAWL_32B": "https://nlp.stanford.edu/data/glove.42B.300d.zip",
+    "COMMON_CRAWL_840B": "https://nlp.stanford.edu/data/glove.840B.300d.zip",
+    "GIGAWORD_6B": "https://nlp.stanford.edu/data/glove.6B.zip",
+}
 
 
 # function to download zip file from URL and extract resulting file into a dir
 # note that outfile name must end in a .zip extension
 def download_and_extract_file(url: str, outfile: str = None) -> None:
     if outfile is None:
-        outfile = url[url.rfind("/") + 1:]
+        outfile = url[url.rfind("/") + 1 :]
     elif not outfile.endswith(".zip"):
         print("ERROR: outfile path must end in a .zip extension")
         exit(1)
@@ -33,7 +33,7 @@ def download_and_extract_file(url: str, outfile: str = None) -> None:
 
     print("Extracting data to: ", extract_dir)
 
-    zip_ref = zipfile.ZipFile(outfile, mode='r')
+    zip_ref = zipfile.ZipFile(outfile, mode="r")
     zip_ref.extractall(extract_dir)
     os.remove(outfile)
 

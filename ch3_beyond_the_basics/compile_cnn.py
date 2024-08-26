@@ -17,9 +17,11 @@ training_img = training_img / 255.0
 test_img = test_img / 255.0
 
 cnn_model = CnnModel()
-cnn_model.model.compile(optimizer=tf.optimizers.Adam(),
-                        loss=tf.losses.SparseCategoricalCrossentropy(),
-                        metrics='accuracy')
+cnn_model.model.compile(
+    optimizer=tf.optimizers.Adam(),
+    loss=tf.losses.SparseCategoricalCrossentropy(),
+    metrics="accuracy",
+)
 
 cnn_model.model.fit(training_img, training_lbl, epochs=50)
 

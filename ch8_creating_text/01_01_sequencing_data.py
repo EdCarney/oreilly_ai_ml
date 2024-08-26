@@ -17,7 +17,7 @@ import json
 LYRIC_FILE = "lanigans_ball_lyrics.txt"
 
 
-with open(LYRIC_FILE, mode='r') as f:
+with open(LYRIC_FILE, mode="r") as f:
     lines = f.readlines()
 
 corpus = [line.lower() for line in lines]
@@ -33,14 +33,15 @@ for line in corpus:
     # break the sentence into larger and larger pieces
     # with the smallest piece having 2 elements
     for i in range(1, len(token_list)):
-        n_gram_sequence = token_list[:i + 1]
+        n_gram_sequence = token_list[: i + 1]
         input_sequences.append(n_gram_sequence)
 
 # we still need to pad the data, so get the longest sequence
 # and then pre-pad to that length
 max_seq_len = max([len(x) for x in input_sequences])
-input_sequences = np.array(tf.keras.utils.pad_sequences(
-    input_sequences, maxlen=max_seq_len, padding='pre'))
+input_sequences = np.array(
+    tf.keras.utils.pad_sequences(input_sequences, maxlen=max_seq_len, padding="pre")
+)
 
 # now use numpy slice syntax to easily get the trainind data
 # (everything up to the last token) and the labels (the last token)
@@ -67,12 +68,11 @@ print(list(outputs[0]))
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(input_dim=num_words, output_dim=8))
 model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(max_seq_len - 1)))
-model.add(tf.keras.layers.Dense(num_words, activation='softmax'))
+model.add(tf.keras.layers.Dense(num_words, activation="softmax"))
 
-model.compile(loss='categorical_crossentropy', optimizer='adam',
-              metrics=['acc'])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["acc"])
 
 history = model.fit(inputs, outputs, epochs=1500, verbose=1)
 
-with open('01_01_history.json', 'w') as f:
+with open("01_01_history.json", "w") as f:
     json.dump(history.history, f)

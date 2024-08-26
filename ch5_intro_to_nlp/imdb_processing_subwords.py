@@ -5,14 +5,15 @@ import tensorflow_datasets as tfds
 # (many tokens, high sematic meaning)
 
 (train_data, test_data), info = tfds.load(
-        "imdb_reviews/subwords32k",
-        split=(tfds.Split.TRAIN, tfds.Split.TEST),
-        as_supervised=True,
-        with_info=True)
+    "imdb_reviews/subwords32k",
+    split=(tfds.Split.TRAIN, tfds.Split.TEST),
+    as_supervised=True,
+    with_info=True,
+)
 
 # we can access the encoder via the dataset information
 
-encoder: tfds.deprecated.text.TextEncoder = info.features['text'].encoder
+encoder: tfds.deprecated.text.TextEncoder = info.features["text"].encoder
 print("Vocab size of encoder is {}".format(encoder.vocab_size))
 
 print(encoder.subwords[:15])

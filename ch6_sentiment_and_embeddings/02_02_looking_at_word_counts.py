@@ -1,18 +1,17 @@
 from collections import OrderedDict
 import tensorflow as tf
 import matplotlib as mp
-from sarcasm_data_processing import (
-        _get_sarcasm_training_testing_splits
-        )
+from sarcasm_data_processing import _get_sarcasm_training_testing_splits
 
 
 def get_tokenizer(vocab_size: int) -> tf.keras.preprocessing.text.Tokenizer:
-    (training_sentences, training_labels), (testing_sentences, testing_labels)\
-            = _get_sarcasm_training_testing_splits()
+    (training_sentences, training_labels), (testing_sentences, testing_labels) = (
+        _get_sarcasm_training_testing_splits()
+    )
 
     tokenizer = tf.keras.preprocessing.text.Tokenizer(
-            num_words=vocab_size,
-            oov_token="<OOV>")
+        num_words=vocab_size, oov_token="<OOV>"
+    )
 
     tokenizer.fit_on_texts(training_sentences)
 

@@ -6,17 +6,19 @@ from sarcasm_data_processing import get_sarcasm_tokenizer
 def _get_embeddings(filepath: str) -> Dict[str, np.ndarray]:
     glove_embeddings = dict()
 
-    with open(filepath, mode='r') as f:
+    with open(filepath, mode="r") as f:
         for line in f:
             values = line.split()
             word = values[0]
-            coeffs = np.asarray(values[1:], dtype='float32')
+            coeffs = np.asarray(values[1:], dtype="float32")
             glove_embeddings[word] = coeffs
 
     return glove_embeddings
 
 
-def _get_tokenizer_embedding(vocab_sz: int, embeddings: Dict[str, np.ndarray]) -> np.ndarray:
+def _get_tokenizer_embedding(
+    vocab_sz: int, embeddings: Dict[str, np.ndarray]
+) -> np.ndarray:
 
     tokenizer = get_sarcasm_tokenizer(vocab_sz)
     embedding_sz = len(next(iter(embeddings.values())))

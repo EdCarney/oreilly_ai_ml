@@ -10,19 +10,10 @@ import tensorflow as tf
 # the token should be something that won't appear elsewhere in your
 # training data
 
-training_data = [
-        'it is rainy today',
-        'it is sunny today',
-        'is it raining today?'
-        ]
-test_data = [
-        'will it snow today?',
-        'it will rain later'
-        ]
+training_data = ["it is rainy today", "it is sunny today", "is it raining today?"]
+test_data = ["will it snow today?", "it will rain later"]
 
-tokenizer = tf.keras.preprocessing.text.Tokenizer(
-        num_words=100,
-        oov_token='<OOV>')
+tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=100, oov_token="<OOV>")
 
 tokenizer.fit_on_texts(training_data)
 

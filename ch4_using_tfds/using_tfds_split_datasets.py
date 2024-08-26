@@ -4,13 +4,13 @@ import tensorflow_datasets as tfds
 # and validation, but we can still establish this ourselves
 
 # the first 80% of the data
-train = tfds.load('cats_vs_dogs', split='train[:80%]', as_supervised=True)
+train = tfds.load("cats_vs_dogs", split="train[:80%]", as_supervised=True)
 
 # the middle 80-90% of the data
-validation = tfds.load('cats_vs_dogs', split='train[80%:90%]', as_supervised=True)
+validation = tfds.load("cats_vs_dogs", split="train[80%:90%]", as_supervised=True)
 
 # the last 10% of the data
-test = tfds.load('cats_vs_dogs', split='train[-10%:]', as_supervised=True)
+test = tfds.load("cats_vs_dogs", split="train[-10%:]", as_supervised=True)
 
 # enumerate returns a set of (index, element), then we take the last element
 # and add one

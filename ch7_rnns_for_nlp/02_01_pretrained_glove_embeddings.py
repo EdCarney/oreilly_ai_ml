@@ -29,8 +29,9 @@ HISTORY_OUT_FILE = "02_02_history.json"
 
 # ------------ LOGIC ------------ #
 
-(train_seqs, train_lbls), (test_seqs, test_lbls) =\
-        get_sarcasm_sequences_and_labels(VOCAB_SIZE)
+(train_seqs, train_lbls), (test_seqs, test_lbls) = get_sarcasm_sequences_and_labels(
+    VOCAB_SIZE
+)
 
 embedding_mat = get_embedding_matrix(PRETRAINED_EMBEDDING_FILE, VOCAB_SIZE)
 
@@ -39,27 +40,34 @@ train_lbls = np.array(train_lbls)
 test_seqs = np.array(test_seqs)
 test_lbls = np.array(test_lbls)
 
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Embedding(VOCAB_SIZE, EMBEDDING_DIM,
-                              weights=[embedding_mat], trainable=False),
-    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(EMBEDDING_DIM,
-                                                       return_sequences=True)),
-    tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(EMBEDDING_DIM)),
-    tf.keras.layers.Dense(DENSE_LAYER_NEURONS, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid'),
-    ])
+model = tf.keras.models.Sequential(
+    [
+        tf.keras.layers.Embedding(
+            VOCAB_SIZE, EMBEDDING_DIM, weights=[embedding_mat], trainable=False
+        ),
+        tf.keras.layers.Bidirectional(
+            tf.keras.layers.LSTM(EMBEDDING_DIM, return_sequences=True)
+        ),
+        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(EMBEDDING_DIM)),
+        tf.keras.layers.Dense(DENSE_LAYER_NEURONS, activation="relu"),
+        tf.keras.layers.Dense(1, activation="sigmoid"),
+    ]
+)
 
-adam = tf.keras.optimizers.Adam(learning_rate=0.00001, beta_1=0.9,
-                                beta_2=0.999, amsgrad=False)
-model.compile(optimizer=adam,
-              loss=tf.keras.losses.BinaryCrossentropy(), metrics=['acc'])
+adam = tf.keras.optimizers.Adam(
+    learning_rate=0.00001, beta_1=0.9, beta_2=0.999, amsgrad=False
+)
+model.compile(
+    optimizer=adam, loss=tf.keras.losses.BinaryCrossentropy(), metrics=["acc"]
+)
 
 print(model.summary())
 
-history = model.fit(train_seqs, train_lbls, epochs=EPOCHS,
-                    validation_data=(test_seqs, test_lbls))
+history = model.fit(
+    train_seqs, train_lbls, epochs=EPOCHS, validation_data=(test_seqs, test_lbls)
+)
 
-with open(HISTORY_OUT_FILE, 'w') as f:
+with open(HISTORY_OUT_FILE, "w") as f:
     json.dump(history.history, f)
 
 model.evaluate(test_seqs, test_lbls)

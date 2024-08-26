@@ -14,7 +14,7 @@ def trim_and_buffer(sz: int, buf_char: str, text: str) -> str:
     return text + buf_char * (sz - len(text))
 
 
-with open(LYRIC_FILE, mode='r') as f:
+with open(LYRIC_FILE, mode="r") as f:
     lines = f.readlines()
 
 corpus = [line.lower() for line in lines]
@@ -26,12 +26,13 @@ input_sequences = []
 for line in corpus:
     token_list = tokenizer.texts_to_sequences([line])[0]
     for i in range(1, len(token_list)):
-        n_gram_sequence = token_list[:i + 1]
+        n_gram_sequence = token_list[: i + 1]
         input_sequences.append(n_gram_sequence)
 
 max_seq_len = max([len(x) for x in input_sequences])
-input_sequences = np.array(tf.keras.utils.pad_sequences(
-    input_sequences, maxlen=max_seq_len, padding='pre'))
+input_sequences = np.array(
+    tf.keras.utils.pad_sequences(input_sequences, maxlen=max_seq_len, padding="pre")
+)
 
 inputs, labels = input_sequences[:, :-1], input_sequences[:, -1]
 
@@ -41,14 +42,13 @@ outputs = tf.keras.utils.to_categorical(labels, num_classes=num_words)
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(input_dim=num_words, output_dim=8))
 model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(max_seq_len - 1)))
-model.add(tf.keras.layers.Dense(num_words, activation='softmax'))
+model.add(tf.keras.layers.Dense(num_words, activation="softmax"))
 
-model.compile(loss='categorical_crossentropy', optimizer='adam',
-              metrics=['acc'])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["acc"])
 
 history = model.fit(inputs, outputs, epochs=1500, verbose=1)
 
-with open('02_01_history.json', 'w') as f:
+with open("02_01_history.json", "w") as f:
     json.dump(history.history, f)
 
 # let's define the start of the sentence we want to use
@@ -64,9 +64,9 @@ for _ in range(next_words):
     # tokenize the sentence and pad it to be the proper length
 
     token_list = tokenizer.texts_to_sequences([my_text])
-    token_list = tf.keras.utils.pad_sequences(token_list,
-                                              maxlen=max_seq_len - 1,
-                                              padding='pre')
+    token_list = tf.keras.utils.pad_sequences(
+        token_list, maxlen=max_seq_len - 1, padding="pre"
+    )
 
     # get the predicted value as an np array of neuron weights
     # we take the index of the max value as our token index
@@ -82,7 +82,12 @@ for _ in range(next_words):
             output_word = word
             break
 
-    print("Confidence:", trim_and_buffer(6, "0", str(max_value)), "Predicted word:", output_word)
+    print(
+        "Confidence:",
+        trim_and_buffer(6, "0", str(max_value)),
+        "Predicted word:",
+        output_word,
+    )
     my_text += " " + output_word
 
 print(my_text)

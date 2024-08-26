@@ -1,15 +1,11 @@
 import numpy as np
 import tensorflow as tf
-from sarcasm_data_processing import (
-        get_sarcasm_sequences_and_labels,
-        VOCAB_SIZE
-        )
+from sarcasm_data_processing import get_sarcasm_sequences_and_labels, VOCAB_SIZE
 
 
 # load the data from our pre-processing module
 
-(train_seqs, train_lbls), (test_seqs, test_lbls) =\
-        get_sarcasm_sequences_and_labels()
+(train_seqs, train_lbls), (test_seqs, test_lbls) = get_sarcasm_sequences_and_labels()
 
 # convert to numpy arrays to put them in a format tensorflow
 # can work with
@@ -30,15 +26,18 @@ test_lbls = np.array(test_lbls)
 # we then feed this representation into a dense NN and eventually to a NN
 # of one node to give us the final indication of sarcastic or not
 
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Embedding(VOCAB_SIZE, 16),
-    tf.keras.layers.GlobalAvgPool1D(),
-    tf.keras.layers.Dense(24, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid'),
-    ])
+model = tf.keras.models.Sequential(
+    [
+        tf.keras.layers.Embedding(VOCAB_SIZE, 16),
+        tf.keras.layers.GlobalAvgPool1D(),
+        tf.keras.layers.Dense(24, activation="relu"),
+        tf.keras.layers.Dense(1, activation="sigmoid"),
+    ]
+)
 
-model.compile(optimizer='adam',
-              loss=tf.keras.losses.BinaryCrossentropy(), metrics=['acc'])
+model.compile(
+    optimizer="adam", loss=tf.keras.losses.BinaryCrossentropy(), metrics=["acc"]
+)
 
 print(model.summary())
 

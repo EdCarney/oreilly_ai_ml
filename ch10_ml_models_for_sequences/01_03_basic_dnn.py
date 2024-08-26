@@ -35,16 +35,18 @@ dataset = windowed_dataset(x_train, window_sz, batch_sz, suffle_buf)
 # single neuron that we do not have an activation function for, this is because
 # we want the final value to be a float, so we just take the raw value output
 
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(10, input_shape=[window_sz], activation='relu'),
-    tf.keras.layers.Dense(10, activation='relu'),
-    tf.keras.layers.Dense(1)
-    ])
+model = tf.keras.models.Sequential(
+    [
+        tf.keras.layers.Dense(10, input_shape=[window_sz], activation="relu"),
+        tf.keras.layers.Dense(10, activation="relu"),
+        tf.keras.layers.Dense(1),
+    ]
+)
 
 # we specify mean-squared-error as the loss function and stochastic gradient
 # decent for our optimizer; these are good choices for what ultimately boils
 # down to a regression problem
 
 sgd = tf.keras.optimizers.SGD(learning_rate=1e-6, momentum=0.9)
-model.compile(loss='mse', optimizer=sgd)
-model.fit(dataset, epochs=100, verbose=1)
+model.compile(loss="mse", optimizer=sgd)
+model.fit(dataset, epochs=100, verbose="1")

@@ -7,7 +7,7 @@ import sys
 
 
 def read_hist_from_file(filename: str) -> Dict[str, List[float]]:
-    with open(filename, 'r') as f:
+    with open(filename, "r") as f:
         hist = json.load(f)
     return hist
 

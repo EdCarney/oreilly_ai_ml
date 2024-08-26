@@ -7,14 +7,14 @@ from constants import STOPWORDS
 # we create a translation table to translate common punctuation and remove
 # it from sentences
 
-table = str.maketrans('', '', string.punctuation)
+table = str.maketrans("", "", string.punctuation)
 
 imdb_sentences = []
-train_data = tfds.as_numpy(tfds.load('imdb_reviews', split='train'))
+train_data = tfds.as_numpy(tfds.load("imdb_reviews", split="train"))
 
 for item in train_data:
     # get the data in normalized lower-case
-    sentence = str(item['text'].decode('UTF-8').lower())
+    sentence = str(item["text"].decode("UTF-8").lower())
 
     # use bs4 to remove any HTML related tags
     soup = BeautifulSoup(sentence)
@@ -22,10 +22,10 @@ for item in train_data:
 
     # words are often combined with punctuation and would be seen as a single
     # word by the tokenizer; insert spaces to remove punctuation later
-    sentence = sentence.replace(',', ' , ')
-    sentence = sentence.replace('.', ' . ')
-    sentence = sentence.replace('-', ' - ')
-    sentence = sentence.replace('/', ' / ')
+    sentence = sentence.replace(",", " , ")
+    sentence = sentence.replace(".", " . ")
+    sentence = sentence.replace("-", " - ")
+    sentence = sentence.replace("/", " / ")
 
     # split sentence into words (splits by space by default)
     words = sentence.split()
@@ -41,7 +41,7 @@ for item in train_data:
 
     imdb_sentences.append(filtered_sentence)
 
-print('first sentence:', imdb_sentences[0])
+print("first sentence:", imdb_sentences[0])
 
 # now we will see the words with the lowest index (the most common) as words
 # that are not stopwords

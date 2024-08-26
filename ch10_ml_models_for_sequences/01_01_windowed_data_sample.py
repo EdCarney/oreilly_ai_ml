@@ -18,7 +18,7 @@ dataset = tf.data.Dataset.range(10)
 dataset = dataset.window(size=5, shift=1, drop_remainder=True)
 dataset = dataset.flat_map(lambda window: window.batch(5))
 
-print('Windows:')
+print("Windows:")
 for window in dataset:
     print(window.numpy())
 
@@ -27,7 +27,7 @@ for window in dataset:
 
 dataset = dataset.map(lambda window: (window[:-1], window[-1:]))
 
-print('\nRaw Data:')
+print("\nRaw Data:")
 for x, y in dataset:
     print(x.numpy(), y.numpy())
 
@@ -37,6 +37,6 @@ for x, y in dataset:
 dataset = dataset.shuffle(buffer_size=10)
 dataset = dataset.batch(2).prefetch(1)
 
-print('\nBatched and Shuffled:')
+print("\nBatched and Shuffled:")
 for x, y in dataset:
     print(x.numpy(), y.numpy())
