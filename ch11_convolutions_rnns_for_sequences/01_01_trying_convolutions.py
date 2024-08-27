@@ -71,15 +71,18 @@ model = tf.keras.models.Sequential(
     ]
 )
 
-optimizer = tf.keras.optimizers.legacy.SGD(lr=1e-5, momentum=0.5)
+optimizer = tf.keras.optimizers.legacy.SGD(learning_rate=1e-5, momentum=0.5)
 model.compile(loss="mse", optimizer=optimizer)
-history = model.fit(dataset, epochs=100, verbose="1")
+
+print("Starting training...")
+history = model.fit(dataset, epochs=100, verbose="0")
+print("...done")
 
 forecast = model_forecast(model, series[..., np.newaxis], window_sz)
 results = forecast[split_time - window_sz : -1, -1, 0]
 
-print(results[:20])
-print(x_valid[:20])
+print("MSE", tf.keras.metrics.mean_squared_error(results, x_valid))
+print("MAE", tf.keras.metrics.mean_absolute_error(results, x_valid))
 
 plt.plot(time_valid, x_valid)
 plt.plot(time_valid, results)
