@@ -1,7 +1,6 @@
 from generate_data import generate_test_data
 import numpy as np
 import tensorflow as tf
-import matplotlib.pyplot as plt
 import keras_tuner as kt
 
 hp = kt.HyperParameters()
