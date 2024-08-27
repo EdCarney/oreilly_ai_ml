@@ -13,3 +13,6 @@ __pycache__/
 horse-or-human/
 *.h5
 glove.*
+
+# ignore output data_dirs for autotuning
+*/my_dir
